@@ -1,0 +1,21 @@
+.view #viewContent {display: block;}
+.view #editContent {display: none;}
+
+.edit #viewContent {display: none;}
+.edit #editContent {display: block;}
+
+.viewArea #viewContent,
+.viewArea #editContent {padding-right: 200px;}
+
+.toolArea {
+  position: absolute;
+  overflow-x: hidden;
+  width:200px;
+  right:0;
+  bottom:0;
+  top:0;
+  border-left: 1px solid #ddd;
+}
+
+.viewToolBox #insertSubPage {width: 100%; margin-top:10px;}
+.editToolBox #uploadImg {width: 100%;}

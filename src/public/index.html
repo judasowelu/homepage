@@ -1,0 +1,57 @@
+<!DOCTYPE 'html'>
+<html>
+  <head>
+  <title>Hello World Page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/css/default.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/jquery/jquery-2.1.1.min.js"></script>
+  <script src="/js/jquery/jquery.form.min.js"></script>
+  <script type="text/javascript" src="/js/socket.js" ></script>
+  <script type="text/javascript" src="/js/page.js" ></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#filePicker").change(function(){
+          page.imageUpload( this );
+      });
+    });
+  </script>
+
+  </head>
+
+
+  <body class="view">
+    <input type="hidden" id="pageId" />
+    <div class="viewArea">
+      <div id="viewContent">
+        <h1 class="headLine"></h1>
+        <div class="content"></div>
+        <h2>sub pages</h2>
+        <div id="subPages"></div>
+        <div class="toolArea">
+          <div class="viewToolBox">
+            <input type="button" value="편집" onclick="page.goEdit()">
+            <div>
+              <input type="text" id="insertSubPage">
+              <input type="button" value="하위 페이지 추가" onclick="page.addSubPage()">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="editContent">
+        <h1 class="headLine" contenteditable="true"></h1>
+        <div class="content" contenteditable="true"></div>
+        <div class="toolArea">
+          <div class="editToolBox">
+            <input type="button" value="저장" onclick="page.save()">
+            <input type="button" value="취소" onclick="page.goView()">
+
+            <input type="file" id="filePicker" value="이미지 업로드">
+            <img id="uploadImg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
