@@ -17,6 +17,16 @@
 .toolArea.edit .editToolBox {
 	display: block;
 }
+#subPages .editmode {
+	display: none;
+}
+#subPages.edit .editmode {
+	display: inline;
+	position: relative;
+	left: -23px;
+	width: 10px;
+	margin-right: -10px;
+}
 
 #five {display: none;}
 

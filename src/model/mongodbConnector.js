@@ -48,6 +48,16 @@ module.exports = {
 			if(err) throw err;
 			callback(doc);
 		});
+	},
+	removeSubPage : function (data, callback) {
+
+		var _id = data.pageId;
+		delete data.pageId;
+
+		this.db.collection('page').update({_id:_id}, {$pull:{"subPages":data.subPageId}}, function(err, doc){
+			if(err) throw err;
+			callback(doc);
+		});
 	}
 };
 

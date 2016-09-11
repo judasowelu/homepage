@@ -6,11 +6,14 @@ function addSubPage (subPageId) {
 	socket.emit('add sub page', {pageId : $("#pageId").val(), subPageId : subPageId});
 };
 
+function removeSubPage (subPageId) {
+	socket.emit('remove sub page', {pageId : $("#pageId").val(), subPageId : subPageId});
+};
+
 function loadMain (hash) {
 	if (window.location.hash.substr(1).indexOf(".page") > 0) {
-		location.href=hash
-		$("#main").remove();
-		socket.emit("hash", "");
+		location.href=hash;
+		requestStorage ();
 	}
 }
 
@@ -20,8 +23,7 @@ function requestStorage () {
 }
 
 function loadStorage (hash) {
-	if (window.location.hash.substr(1) != hash) {
-		location.href=hash;
+	if ("#"+window.location.hash.substr(1) != hash && (location.href=hash) ) {
 		requestStorage ();
 	}
 }

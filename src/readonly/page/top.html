@@ -29,11 +29,11 @@
 <script type="text/javascript" async="sync" src="//{{url}}/assets/js/jquery.scrollzer.min.js"></script>
 <script type="text/javascript" async="sync" src="//{{url}}/assets/js/jquery.scrolly.min.js"></script>
 <script>
-scriptTag("//{{url}}/assets/js/skel.min.js", loadUtil);
-function loadUtil () {
-	scriptTag("//{{url}}/assets/js/util.js", loadMain);
+scriptTag("//{{url}}/assets/js/skel.min.js", loadUtilJs);
+function loadUtilJs () {
+	scriptTag("//{{url}}/assets/js/util.js", loadMainJs);
 }
-function loadMain () {
+function loadMainJs () {
 	scriptTag("//{{url}}/assets/js/main.js", readonlyOnload);
 }
 function readonlyOnload () {

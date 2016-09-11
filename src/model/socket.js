@@ -52,6 +52,12 @@ module.exports = {
 				});
 			});
 
+			socket.on('remove sub page', function (data) {
+				mongodb.removeSubPage(data, function (doc) {
+					socket.emit("done remove sub page", {pageId : data.pageId});
+				});
+			});
+
 			socket.emit('body', top);
 			socket.emit('body', wrapper);
 			fs.readFile(webContentDir+"page/header.html", "utf-8", function (err, content) {

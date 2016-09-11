@@ -1,5 +1,8 @@
 var homeurl = document.getElementsByTagName('script')[0].getAttribute("src").replace("/public/js/i.js", "");
 function scriptTag(src, callback) {
+	if (typeof callback == "undefined") {
+		callback = {};
+	}
     var s = document.createElement('script');
     s.type = 'text/' + (src.type || 'javascript');
     s.src = src.src || src;
@@ -9,7 +12,9 @@ function scriptTag(src, callback) {
         var state = s.readyState;
         if (!callback.done && (!state || /loaded|complete/.test(state))) {
             callback.done = true;
-            callback();
+            if (typeof callback === "function") {
+            	callback();
+            }
         }
     };
 
@@ -41,7 +46,7 @@ function initSocket () {
 	socket.on('wrapper', function(m) {
 		$("#wrapper").prepend(m);
 	});
-	
+
 	socket.on('ready', function (data) {
 		var path = window.location.hash.substr(1);
 		if (path.indexOf(".page") > 0) {
@@ -57,10 +62,14 @@ function initSocket () {
 	});
 	
 	socket.on('done add sub page', function (data) {
-		location.reload();
+		requestStorage ();
+	});
+	
+	socket.on('done remove sub page', function (data) {
+		requestStorage ();
 	});
 	
 	socket.on('done save page', function (data) {
-		location.reload();
+		requestStorage ();
 	});
 }
