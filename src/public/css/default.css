@@ -2,7 +2,7 @@
   position: absolute;
   overflow-x: hidden;
   right:0;
-  top:0;
+  top:6px;
 }
 
 .toolArea .viewToolBox {
@@ -19,3 +19,9 @@
 }
 
 #five {display: none;}
+
+@media screen and (max-width: 1024px) {
+	.toolArea {
+		top: 50px;
+	}
+}
