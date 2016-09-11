@@ -2,12 +2,11 @@ var page = new function () {
 	this.load = function (data) {
 		$("#pageId").val(data.pageId);
 		if (data.pageData == null) {
-			$(".headLine").html("없는 페이지");
-			$(".content").html("없는 페이지");
+			$("#headLine").html("없는 페이지");
+			$("#content").html("없는 페이지");
 		} else {
-			$(".headLine").html(decodeURI(data.pageData.headLine));
-			$(".content").html(decodeURI(data.pageData.content));
-
+			$("#headLine").html(decodeURI(data.pageData.headLine));
+			$("#content").html(decodeURI(data.pageData.content));
 
 			var $subPages = $("#subPages");
 			for (var i in data.pageData.subPages) {
@@ -17,38 +16,46 @@ var page = new function () {
 	};
 
 	this.getLinkSubPage = function (subPageId) {
-		var str = "<p><a href='/#"+subPageId+".page' onclick='loadBoard(\"#"+subPageId+".page\")'>"+subPageId+"</a></p>"
-		return str;
+		return "<li><a href='#"+subPageId+".page' onclick='loadStorage(\"#"+subPageId+".page\")'>"+subPageId+"</a></li>"
 	}
 
 	this.goEdit = function () {
-		$("#edit").removeClass("view");
-		$("#edit").addClass("edit");
+		$("#headLine").attr("contenteditable", "true");
+		$("#content").attr("contenteditable", "true");
+		$(".toolArea").addClass("edit")
+		$("#five").show();
 	};
 
 	this.goView = function () {
-		$("#editContent .headLine").html($("#viewContent .headLine").html())
-		$("#editContent .content").html($("#viewContent .content").html())
-
-		$("#edit").removeClass("edit");
-		$("#edit").addClass("view");
+		if (confirm("변경사항이 저장되지 않습니다.")) {
+			requestStorage ();
+		}
 	};
+	
+	this.contentToggle = function () {
+		var c = $("#content");
+		if (c[0].tagName === "DIV") {
+			c.replaceWith('<textarea id="content">' + c.html() +'</textarea>')
+		} else {
+			c.replaceWith('<div id="content" contenteditable=true>' + c.html() +'</div>')
+		}
+	}
 
 	this.addSubPage = function () {
-		var subPageId = $("#insertSubPage").val();
-		if (subPageId == "") {
-			alert("제목이 필요함");
+		var subPageId = prompt("Please enter your name");
+		if (subPageId == null) {
+	    	alert("제목이 필요함");
 		} else {
-			console.log("addSubPage")
 			addSubPage(subPageId);
 		}
+
 	};
 
 	this.save = function () {
 		savePage({
 			pageId : $("#pageId").val(),
-			headLine : encodeURI($("#editContent .headLine").html()),
-			content : encodeURI($("#editContent .content").html())
+			headLine : encodeURI($("#headLine").html()),
+			content : encodeURI($("#content").html())
 		})
 	};
 
@@ -56,9 +63,8 @@ var page = new function () {
 		if ( input.files && input.files[0] ) {
 			var FR= new FileReader();
 			FR.onload = function(e) {
-				var img = $("<img>");
-				img.attr( "src", e.target.result );
-				$('#editContent .editToolBox #filePicker').after(img)
+				var img = $("<span class='image fit'><img src='"+e.target.result+"' /></span>");
+				$('#content ').append(img)
 			};
 			FR.readAsDataURL( input.files[0] );
 		}

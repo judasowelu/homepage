@@ -1,50 +1,35 @@
 				<!-- Main -->
 <div id="main">
-	<link rel="stylesheet" type="text/css" href="//{{url}}/public/css/default.css">
-	<script type="text/javascript" src="//{{url}}/public/js/jquery/jquery.form.min.js"></script>
-	<script type="text/javascript" src="//{{url}}/public/js/page.js" ></script>
 						<!-- One -->
-	<section id="edit" class="view">
-		<div class="container">
+	<section id="edit">
+			<div class="container">
 
-			<input type="hidden" id="pageId" />
-			<div class="viewArea">
-				<div id="viewContent">
-					<h2 class="headLine"></h2>
-					<div class="content"></div>
-					<h3>Tags</h3>
-					<div id="subPages"></div>
-					<div class="toolArea">
-						<div class="viewToolBox">
-							<input type="button" value="편집" onclick="page.goEdit()">
-							<div>
-								<input type="text" id="insertSubPage"> <input
-									type="button" value="하위 페이지 추가" onclick="page.addSubPage()">
-							</div>
-						</div>
+				<input type="hidden" id="pageId" />
+				<h2 id="headLine"></h2>
+				<div id="content"></div>
+				<h3>Tags</h3>
+				<ul id="subPages"></ul>
+				<div class="toolArea">
+					<div class="viewToolBox">
+						<input type="button" value="편집" onclick="page.goEdit()">
+						<input type="button" value="Add Tags" onclick="page.addSubPage()">
 					</div>
-				</div>
-				<div id="editContent">
-					<h2 class="headLine" contenteditable="true"></h2>
-					<div class="content" contenteditable="true"></div>
-					<div class="toolArea">
-						<div class="editToolBox">
-							<input type="button" value="저장" onclick="page.save()"> <input
-								type="button" value="취소" onclick="page.goView()"> <input
-								type="file" id="filePicker" value="이미지 업로드"> <img
-								id="uploadImg">
-						</div>
+					<div class="editToolBox">
+						<input type="button" value="저장" onclick="page.save()">
+						<input type="button" value="취소" onclick="page.goView()">
+						<input type="button" value="</>" onclick="page.contentToggle()">
+						<input type="file" id="filePicker" value="이미지">
 					</div>
 				</div>
 			</div>
-		</div>
-
 	</section>
+
 
 						<!-- Five -->
 							<section id="five">
 								<div class="container">
-									<h3>Elements</h3>
+									<h3>onclick="loadStorage('#.page')"</h3>
+									<a href="#" onclick="loadStorage(\"#.page\")">test</a>
 
 									<section>
 										<h4>Text</h4>
@@ -388,12 +373,12 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 							</section>
 
 </div>
-			<script type="text/javascript">
-				$(function() {
-					$("#filePicker").change(function() {
-						page.imageUpload(this);
-					});
-					socket.emit('need board');
-				});
-			</script>
+<script type="text/javascript">
+	$(function() {
+		$("#filePicker").change(function() {
+			page.imageUpload(this);
+		});
+	});
+	socket.emit('need board');
+</script>
 	

@@ -5,25 +5,18 @@ module.exports = {
 
 		mongodb.init();
 
-		var webContentDir = "./readonly/";
+		var webContentDir = "./"+GLOBAL.propertys.cssName+"/";
 		var top = "";
 		var wrapper = "";
 	    fs.readFile(webContentDir+"page/top.html", "utf-8", function (err, content) {
-	    	top = urlChanger(content);
+	    	top = module.exports.urlChanger(content);
+	    });
+	    fs.readFile("./public/header.html", "utf-8", function (err, content) {
+	    	top += module.exports.urlChanger(content);
 	    });
 	    fs.readFile(webContentDir+"page/wrapper.html", "utf-8", function (err, content) {
-	    	wrapper = urlChanger(content);
+	    	wrapper = module.exports.urlChanger(content);
 	    });
-
-	    var urlChanger = function (content) {
-	    	content = content.replace(/\{\{([a-zA-Z0-1_-]*)\}\}/g, function (text, key) {
-	    		if (GLOBAL.property.hasOwnProperty(key)) {
-	    			return GLOBAL.property[key];
-	    		}
-	    		return "";
-	    	});
-	    	return content;
-	    };
 
 		io.on('connection', function (socket) {
 			socket.on('hash', function(msg) {
@@ -33,7 +26,7 @@ module.exports = {
 					msg = webContentDir+"index.html";
 				}
 			    fs.readFile(msg, "utf-8", function (err, content) {
-					socket.emit('wrapper', urlChanger(content));
+					socket.emit('wrapper', module.exports.urlChanger(content));
 			    });
 			});
 
@@ -62,8 +55,18 @@ module.exports = {
 			socket.emit('body', top);
 			socket.emit('body', wrapper);
 			fs.readFile(webContentDir+"page/header.html", "utf-8", function (err, content) {
-				socket.emit('head append', urlChanger(content));
+				socket.emit('head append', module.exports.urlChanger(content));
 			});
 		});
-	}
+	},
+    urlChanger : function (content) {
+    	content = content.replace(/\{\{([a-zA-Z0-1_-]*)\}\}/g, function (text, key) {
+    		if (GLOBAL.urlDatas.hasOwnProperty(key)) {
+    			return GLOBAL.urlDatas[key];
+    		}
+    		return "";
+    	});
+    	return content;
+    }
+
 };
