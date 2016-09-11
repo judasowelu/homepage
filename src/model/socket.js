@@ -9,41 +9,36 @@ module.exports = {
 		var top = "";
 		var wrapper = "";
 	    fs.readFile(webContentDir+"page/top.html", "utf-8", function (err, content) {
-	    	top = content;
+	    	top = urlChanger(content);
 	    });
 	    fs.readFile(webContentDir+"page/wrapper.html", "utf-8", function (err, content) {
-	    	wrapper = content;
+	    	wrapper = urlChanger(content);
 	    });
+
+	    var urlChanger = function (content) {
+	    	content = content.replace(/\{\{([a-zA-Z0-1_-]*)\}\}/g, function (text, key) {
+	    		if (GLOBAL.property.hasOwnProperty(key)) {
+	    			return GLOBAL.property[key];
+	    		}
+	    		return "";
+	    	});
+	    	return content;
+	    };
 
 		io.on('connection', function (socket) {
 			socket.on('hash', function(msg) {
-				socket.emit('body', top);
-				socket.emit('body', wrapper);
 				if (msg.indexOf(".page") > 0) {
 					msg = "./public/edit.html";
 				} else {
 					msg = webContentDir+"index.html";
 				}
 			    fs.readFile(msg, "utf-8", function (err, content) {
-					socket.emit('wrapper', content);
+					socket.emit('wrapper', urlChanger(content));
 			    });
-
 			});
 
 			socket.on('need board', function() {
 				socket.emit('ready', {pageId:"top"});
-			});
-
-			socket.on('need script', function() {
-				fs.readdir(webContentDir + "assets/js", function (err, files) {
-					if (!err) {
-						for (key in files) {
-							if (files[key].indexOf("z_") == 0) {
-								socket.emit('script append', files[key]);
-							}
-						}
-					}
-				})
 			});
 
 			socket.on('page data', function (data) {
@@ -64,8 +59,10 @@ module.exports = {
 				});
 			});
 
+			socket.emit('body', top);
+			socket.emit('body', wrapper);
 			fs.readFile(webContentDir+"page/header.html", "utf-8", function (err, content) {
-				socket.emit('head append', content);
+				socket.emit('head append', urlChanger(content));
 			});
 		});
 	}
