@@ -64,7 +64,7 @@ app.post('/imageUpload', function(req, res) {
 		if (err) {
 			console.log(err);
 		}
-		res.send(returnFilePath);
+		res.send("//" + GLOBAL.urlDatas.url + returnFilePath);
 	});
 });
 

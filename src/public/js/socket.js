@@ -20,7 +20,6 @@ function setHash (hash) {
 }
 
 function requestStorage () {
-	$("#main").remove();
 	socket.emit("hash", window.location.hash.substr(1));
 }
 
@@ -34,7 +33,6 @@ function hasPage (url) {
 var hash = window.location.hash.substr(1);
 window.onhashchange = function() {
 	var _hash = window.location.hash.substr(1);
-	console.log(hash + " : " + _hash);
 	if (hasPage(hash) && !hasPage(_hash) || hasPage(_hash)
 			) {
 		requestStorage();

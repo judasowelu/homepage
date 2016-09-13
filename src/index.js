@@ -44,6 +44,7 @@ function initSocket () {
 	});
 	
 	socket.on('wrapper', function(m) {
+		$("#main").remove();
 		$("#wrapper").prepend(m);
 	});
 
