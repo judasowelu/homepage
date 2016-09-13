@@ -1,22 +1,14 @@
 module.exports = {
 	init : function (io) {
 		var fs = require('fs');
-		var mongodb = require("./mongodbConnector.js");
 
+		var mongodb = require("./mongodbConnector.js");
 		mongodb.init();
 
 		var webContentDir = "./"+GLOBAL.propertys.cssName+"/";
-		var top = "";
-		var wrapper = "";
-	    fs.readFile(webContentDir+"page/top.html", "utf-8", function (err, content) {
-	    	top = module.exports.urlChanger(content);
-	    });
-	    fs.readFile("./public/header.html", "utf-8", function (err, content) {
-	    	top += module.exports.urlChanger(content);
-	    });
-	    fs.readFile(webContentDir+"page/wrapper.html", "utf-8", function (err, content) {
-	    	wrapper = module.exports.urlChanger(content);
-	    });
+		var top = module.exports.urlChanger(fs.readFileSync(webContentDir+"page/top.html", "utf-8"));
+	    top += module.exports.urlChanger(fs.readFileSync("./public/header.html", "utf-8"));
+	    var wrapper = module.exports.urlChanger(fs.readFileSync(webContentDir+"page/wrapper.html", "utf-8"));
 
 		io.on('connection', function (socket) {
 			socket.on('hash', function(msg) {

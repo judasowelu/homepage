@@ -17,7 +17,7 @@ var page = new function() {
 	};
 
 	this.getLinkSubPage = function(subPageId) {
-		return "<li><a class=\"button alt small\" href='#" + subPageId + ".page' onclick='loadStorage(\"#" + subPageId + ".page\")'>#" + subPageId + "</a>" +
+		return "<li><a class=\"button alt small\" href='#" + subPageId + ".page' onclick='setHash(\"#" + subPageId + ".page\")'>#" + subPageId + "</a>" +
 				"</li> <a class='editmode' href='javascript:' onclick='page.removeSubPage(\"" + subPageId + "\")'>x</a>"
 	}
 
@@ -66,7 +66,8 @@ var page = new function() {
 		})
 	};
 
-	this.imageResize = function(img) {
+	this.imageResize = function($image, callback) {
+		img = $image[0];
 		var canvas = document.createElement('canvas');
 
 		var MAX_WIDTH = 600;
@@ -90,9 +91,23 @@ var page = new function() {
 		var ctx = canvas.getContext("2d");
 		ctx.drawImage(img, 0, 0, width, height);
 		
-		img.setAttribute("src", canvas.toDataURL("image/png"));
+		
+		var imgData = canvas.toDataURL("image/png");
+		$.ajax({
+			url : homeurl + "/imageUpload",
+			type : "POST",
+			data : {
+				imgData : imgData
+			},
+			success : function (fileurl) {
+				img.setAttribute("src", fileurl);
+				callback($image);
+			}
+		});
+
+
 	};
-	
+
 	this.imageUpload = function(input) {
 		if (input.files && input.files[0]) {
 			var FR = new FileReader();
@@ -100,11 +115,11 @@ var page = new function() {
 				var $image = $("<img>");
 				$image.attr("src", e.target.result);
 
-				page.imageResize($image[0])
-				var $span = $("<span class='image fit'>");
-				$span.append($image)
-
-				$('#content ').append($span)
+				page.imageResize($image, function ($image) {
+					var $span = $("<span class='image fit'>");
+					$span.append($image)
+					$('#content ').append($span);
+				});
 			};
 			FR.readAsDataURL(input.files[0]);
 		}

@@ -1,5 +1,4 @@
-				<!-- Main -->
-<div id="main">
+<div id="main"><!-- Main -->
 						<!-- One -->
 	<section id="edit">
 			<div class="container">
@@ -18,7 +17,11 @@
 						<input type="button" value="저장" onclick="page.save()">
 						<input type="button" value="취소" onclick="page.goView()">
 						<input type="button" value="</>" onclick="page.contentToggle()">
-						<input type="file" id="filePicker" value="이미지">
+						<label for="filePicker" class="filebox button">
+							업로드
+							<input type="file" id="filePicker" value="이미지">
+						</label>
+					
 					</div>
 				</div>
 			</div>
@@ -28,8 +31,8 @@
 						<!-- Five -->
 							<section id="five">
 								<div class="container">
-									<h3>onclick="loadStorage('#.page')"</h3>
-									<a href="#" onclick="loadStorage(\"#.page\")">test</a>
+									<h3>onclick="setHash('#.page')"</h3>
+									<a href="#" onclick="setHash(\"#.page\")">test</a>
 
 									<section>
 										<h4>Text</h4>
@@ -372,13 +375,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 								</div>
 							</section>
 
-</div>
-<script type="text/javascript">
-	$(function() {
-		$("#filePicker").change(function() {
-			page.imageUpload(this);
+	<script type="text/javascript">
+		$(function() {
+			$("#filePicker").change(function() {
+				page.imageUpload(this);
+			});
 		});
-	});
-	socket.emit('need board');
-</script>
+		socket.emit('need board');
+	</script>
+</div>
 	

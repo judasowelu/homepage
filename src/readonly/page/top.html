@@ -9,10 +9,10 @@
 		</header>
 		<nav id="nav">
 			<ul>
-				<li><a href="#one" onclick="loadMain('#one');" class="active">About</a></li>
-				<li><a href="#two" onclick="loadMain('#two');">Things I Can Do</a></li>
-				<li><a href="#three" onclick="loadMain('#three');">A Few Accomplishments</a></li>
-				<li><a href="#top.page" onclick="loadStorage('#top.page');">Storage</a></li>
+				<li><a href="#one" onclick="setHash('#one');" class="active">About</a></li>
+				<li><a href="#two" onclick="setHash('#two');">Things I Can Do</a></li>
+				<li><a href="#three" onclick="setHash('#three');">A Few Accomplishments</a></li>
+				<li><a href="#top.page" onclick="setHash('#top.page');">Storage</a></li>
 			</ul>
 		</nav>
 		<footer>
@@ -26,8 +26,8 @@
 		</footer>
 	</section>
 
-<script type="text/javascript" async="sync" src="//{{url}}/assets/js/jquery.scrollzer.min.js"></script>
-<script type="text/javascript" async="sync" src="//{{url}}/assets/js/jquery.scrolly.min.js"></script>
+<script type="text/javascript" src="//{{url}}/assets/js/jquery.scrollzer.min.js"></script>
+<script type="text/javascript" src="//{{url}}/assets/js/jquery.scrolly.min.js"></script>
 <script>
 scriptTag("//{{url}}/assets/js/skel.min.js", loadUtilJs);
 function loadUtilJs () {
