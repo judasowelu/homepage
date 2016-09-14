@@ -9,6 +9,8 @@ node.js, mongodb
 
 ## Usage
 
+sorry for my stupid english 
+
 conf/urlDatas.js
 
 	module.exports = {
