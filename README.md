@@ -28,7 +28,7 @@ conf/propertys.js
 
 src/index.html
 
-	&lt;!doctype html&gt;&lt;script src="//insertUserNodeServerAddress/i"&gt;&lt;/script&gt;
+	<!doctype html><script src="//insertUserNodeServerAddress/i"></script>
 
  -&gt; write node server url and upload to index page
  	if you use public server then don`t modify
@@ -52,7 +52,7 @@ conf/propertys.js
 
 src/index.html
 
-	&lt;!doctype html&gt;&lt;script src="//{{url}}/i"&gt;&lt;/script&gt;
+	<!doctype html><script src="//{{url}}/i"></script>
 
  -&gt; do not need to modify
 
