@@ -25,6 +25,22 @@ scriptTag(homeurl+"/public/js/jquery/jquery-2.1.1.min.js", function () {
 	scriptTag(homeurl+"/socket.io/socket.io.js", initSocket);
 });
 
+function hasPage (url) {
+	if (url.indexOf(".page") > 0) {
+		return true;
+	}
+	return false;
+}
+
+function setActiveMenu () {
+	hash = window.location.hash.substr(1);
+	if (hasPage(hash)) {
+		$("[href='#top.page']").addClass("active");
+	} else {
+		$("[href='#one']").addClass("active");
+	}
+}
+
 var socket;
 function initSocket () {
 	socket = io.connect(homeurl);
@@ -40,7 +56,8 @@ function initSocket () {
 	socket.on('body', function(m) {
 		$("body").append(m);
 		$("#nav a").removeClass("active");
-		$("#nav [href='#"+window.location.hash.substr(1)+"']").addClass("active");
+		
+		setActiveMenu();		
 	});
 	
 	socket.on('wrapper', function(m) {
@@ -57,25 +74,25 @@ function initSocket () {
 		}
 
 	});
-	
+
 	socket.on('page data', function (data) {
 		page.load(data);
 	});
-	
+
 	socket.on('done add sub page', function (data) {
 		requestStorage ();
 	});
-	
+
 	socket.on('done remove sub page', function (data) {
 		requestStorage ();
 	});
-	
+
 	socket.on('done save page', function (data) {
 		requestStorage ();
 	});
 }
 
 function login () {
-	var pass = prompt();
+	var pass = prompt("root permission");
 	socket.emit("login", pass);
 }

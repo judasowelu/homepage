@@ -17,8 +17,8 @@ var page = new function() {
 	};
 
 	this.getLinkSubPage = function(subPageId) {
-		return "<li><a class=\"button alt small\" href='#" + subPageId + ".page' onclick='setHash(\"#" + subPageId + ".page\")'>#" + subPageId + "</a>" +
-				"</li> <a class='editmode' href='javascript:' onclick='page.removeSubPage(\"" + subPageId + "\")'>x</a>"
+		return "<li><a class=\"button alt small\" href='#" + subPageId + ".page'>#" + subPageId + "</a>" +
+				"<a class='editmode' href='javascript:' onclick='page.removeSubPage(\"" + subPageId + "\")'></a></li>"
 	}
 
 }

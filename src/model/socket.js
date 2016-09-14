@@ -60,6 +60,7 @@ module.exports = {
 				if (pass == "sudo su") {
 					var admin = '<script type="text/javascript" src="//{{url}}/public/js/admin.js"></script>';
 					socket.emit('head append', module.exports.urlChanger(admin));
+					socket.isAdmin = true;
 				}
 			});
 		});

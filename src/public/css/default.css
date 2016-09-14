@@ -25,12 +25,8 @@
 #subPages .editmode {
 	display: none;
 }
-#subPages.edit .editmode {
-	display: inline;
+#subPages li {
 	position: relative;
-	left: -23px;
-	width: 10px;
-	margin-right: -10px;
 }
 
 #five {display: none;}

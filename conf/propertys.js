@@ -1,4 +1,4 @@
 module.exports = {
 		cssName : "readonly",
-		mongodbUrl : "localhost"
+		mongodbUrl : "192.168.0.4"
 }

@@ -2,14 +2,19 @@ module.exports = {
 	init : function () {
 		var MongoClient = require('mongodb').MongoClient
 		var Server = require('mongodb').Server;
+		
+		var This = this;
 
-		var mongoclient = new MongoClient(new Server(GLOBAL.propertys.mongodbUrl, GLOBAL.propertys.mongodbPort|27017, {'native_parser':true}));
-		this.db = mongoclient.db('genius');
-
-		mongoclient.open(function(err, mongoclient) {});
+		MongoClient.connect("mongodb://"+GLOBAL.propertys.mongodbUrl+":"+(GLOBAL.propertys.mongodbPort|27017)+"/genius", function(err, db) {
+			if (err) {
+				console.log("connect err " + err);
+			} else {
+				This.collection = db.collection('page');
+			}
+		});
 	},
 	getPageData: function (data, callback) {
-		this.db.collection('page').findOne({_id : data.pageId}, function(err,doc){
+		this.collection.findOne({_id : data.pageId}, function(err,doc){
 			if(err) throw err;
 			if (doc != null) {
 				delete doc._id;
@@ -26,14 +31,14 @@ module.exports = {
 		delete data.pageId;
 
 		if (_id == "") {
-			this.db.collection('page').insert(data, function(err, doc){
+			this.collection.insert(data, function(err, doc){
 				if(err) throw err;
 
 				console.log("savePage on id is empty dos : " + JSON.stringify(doc));
 				callback(doc);
 			});
 		} else {
-			this.db.collection('page').update({_id:_id}, {$set: data}, {upsert: true}, function(err, doc){
+			this.collection.update({_id:_id}, {$set: data}, {upsert: true}, function(err, doc){
 				if(err) throw err;
 				callback(doc);
 			});
@@ -44,7 +49,7 @@ module.exports = {
 		var _id = data.pageId;
 		delete data.pageId;
 
-		this.db.collection('page').update({_id:_id}, {$addToSet:{"subPages":data.subPageId}}, function(err, doc){
+		this.collection.update({_id:_id}, {$addToSet:{"subPages":data.subPageId}}, function(err, doc){
 			if(err) throw err;
 			callback(doc);
 		});
@@ -54,7 +59,7 @@ module.exports = {
 		var _id = data.pageId;
 		delete data.pageId;
 
-		this.db.collection('page').update({_id:_id}, {$pull:{"subPages":data.subPageId}}, function(err, doc){
+		this.collection.update({_id:_id}, {$pull:{"subPages":data.subPageId}}, function(err, doc){
 			if(err) throw err;
 			callback(doc);
 		});
