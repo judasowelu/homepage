@@ -74,3 +74,8 @@ function initSocket () {
 		requestStorage ();
 	});
 }
+
+function login () {
+	var pass = prompt();
+	socket.emit("login", pass);
+}

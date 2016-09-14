@@ -13,7 +13,7 @@ module.exports = {
 		io.on('connection', function (socket) {
 			socket.on('hash', function(msg) {
 				if (msg.indexOf(".page") > 0) {
-					msg = "./public/edit.html";
+					msg = "./public/content.html";
 				} else {
 					msg = webContentDir+"index.html";
 				}
@@ -52,8 +52,15 @@ module.exports = {
 
 			socket.emit('body', top);
 			socket.emit('body', wrapper);
-			fs.readFile(webContentDir+"page/header.html", "utf-8", function (err, content) {
+			fs.readFile(webContentDir+"page/header.html", "UTF-8", function (err, content) {
 				socket.emit('head append', module.exports.urlChanger(content));
+			});
+
+			socket.on('login', function(pass) {
+				if (pass == "sudo su") {
+					var admin = '<script type="text/javascript" src="//{{url}}/public/js/admin.js"></script>';
+					socket.emit('head append', module.exports.urlChanger(admin));
+				}
 			});
 		});
 	},

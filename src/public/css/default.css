@@ -1,8 +1,13 @@
 .toolArea {
-  position: absolute;
+  position: fixed;
   overflow-x: hidden;
   right:0;
   top:6px;
+  display: none;
+}
+
+.admin .toolArea {
+	display: inherit;
 }
 
 .toolArea .viewToolBox {
