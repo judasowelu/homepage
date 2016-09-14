@@ -3,7 +3,7 @@ module.exports = {
 		var MongoClient = require('mongodb').MongoClient
 		var Server = require('mongodb').Server;
 
-		var mongoclient = new MongoClient(new Server('192.168.0.4',27017,{'native_parser':true}));
+		var mongoclient = new MongoClient(new Server(GLOBAL.propertys.mongodbUrl, GLOBAL.propertys.mongodbPort|27017, {'native_parser':true}));
 		this.db = mongoclient.db('genius');
 
 		mongoclient.open(function(err, mongoclient) {});

@@ -2,13 +2,58 @@
 
 # homepage
 
+minimal homepage 
+
+node.js, mongodb
 
 
 ## Usage
 
+conf/urlDatas.js
+	module.exports = {
+			url : "insertUserNodeServerAddress"
+	}
+	 -> write node server url
 
+conf/propertys.js
+	module.exports = {
+			cssName : "readonly",
+			mongodbUrl : "insertUserMongodbAddress"
+			[, mongodbPort : "insertUserMongodbPort"]
+	}
+	 -> write mongodb address
+
+src/index.html
+	<!doctype html><script src="//insertUserNodeServerAddress/i"></script>
+
+	 -> write node server url and upload to index page
+	 	if you use public server then don`t modify
 
 ## Developing
+
+ex) localhost
+
+conf/urlDatas.js
+	module.exports = {
+			url : "localhost:3080"
+	}
+
+conf/propertys.js
+	module.exports = {
+			cssName : "readonly",
+			mongodbUrl : "localhost"
+	}
+
+src/index.html
+	<!doctype html><script src="//{{url}}/i"></script>
+
+	-> do not need to modify
+
+run node
+> node main.js
+
+go to browser and write address
+> localhost:3080
 
 
 
