@@ -22,10 +22,6 @@ module.exports = {
 			    });
 			});
 
-			socket.on('need board', function() {
-				socket.emit('ready', {pageId:"top"});
-			});
-
 			socket.on('page data', function (data) {
 				mongodb.getPageData(data, function (data) {
 					socket.emit("page data", data);
@@ -50,6 +46,7 @@ module.exports = {
 				});
 			});
 
+			socket.emit('clean');
 			socket.emit('body', top);
 			socket.emit('body', wrapper);
 			fs.readFile(webContentDir+"page/header.html", "UTF-8", function (err, content) {

@@ -12,30 +12,30 @@
 	}
 	</style>
 	<section id="edit">
-			<div class="container">
+		<div class="container">
 
-				<input type="hidden" id="pageId" />
-				<h2 id="headLine"></h2>
-				<div id="content"></div>
-				<h3>Tags</h3>
-				<ul class="actions" id="subPages"></ul>
-				<div class="toolArea">
-					<div class="viewToolBox">
-						<input type="button" value="편집" onclick="page.goEdit()"><br/><br/>
-						<input type="button" value="Tags" onclick="page.addSubPage()">
-					</div>
-					<div class="editToolBox">
-						<input type="button" value="저장" onclick="page.save()"><br/><br/>
-						<input type="button" value="취소" onclick="page.goView()"><br/><br/>
-						<input type="button" value="</>" onclick="page.contentToggle()"><br/><br/>
-						<label for="filePicker" class="filebox button">
-							업로드
-							<input type="file" id="filePicker" value="이미지">
-						</label>
-					
-					</div>
+			<input type="hidden" id="pageId" />
+			<h2 id="headLine"></h2>
+			<div id="content"></div>
+			<h3>Tags</h3>
+			<ul class="actions" id="subPages"></ul>
+			<div class="toolArea">
+				<div class="viewToolBox">
+					<input type="button" value="편집" onclick="page.goEdit()"><br/><br/>
+					<input type="button" value="Tags" onclick="page.addSubPage()">
+				</div>
+				<div class="editToolBox">
+					<input type="button" value="저장" onclick="page.save()"><br/><br/>
+					<input type="button" value="취소" onclick="page.goView()"><br/><br/>
+					<input type="button" value="</>" onclick="page.contentToggle()"><br/><br/>
+					<label for="filePicker" class="filebox button">
+						업로드
+						<input type="file" id="filePicker" onchange="page.imageUpload(this)" value="이미지">
+					</label>
+
 				</div>
 			</div>
+		</div>
 	</section>
 
 
@@ -384,12 +384,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 							</section>
 
 	<script type="text/javascript">
-		$(function() {
-			$("#filePicker").change(function() {
-				page.imageUpload(this);
-			});
-		});
-		socket.emit('need board');
+		requestPage ();
 	</script>
 </div>
-	

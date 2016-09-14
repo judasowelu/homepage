@@ -41,6 +41,15 @@ function setActiveMenu () {
 	}
 }
 
+function requestPage () {
+	var path = window.location.hash.substr(1);
+	if (path.indexOf(".page") > 0) {
+		socket.emit('page data', {pageId : path.replace(".page", "")});
+	} else {
+		socket.emit('page data', data);
+	}
+}
+
 var socket;
 function initSocket () {
 	socket = io.connect(homeurl);
@@ -65,16 +74,6 @@ function initSocket () {
 		$("#wrapper").prepend(m);
 	});
 
-	socket.on('ready', function (data) {
-		var path = window.location.hash.substr(1);
-		if (path.indexOf(".page") > 0) {
-			socket.emit('page data', {pageId : path.replace(".page", "")});
-		} else {
-			socket.emit('page data', data);
-		}
-
-	});
-
 	socket.on('page data', function (data) {
 		page.load(data);
 	});
@@ -89,6 +88,9 @@ function initSocket () {
 
 	socket.on('done save page', function (data) {
 		requestStorage ();
+	});
+	socket.on('clean', function () {
+		$("html").html("");
 	});
 }
 
