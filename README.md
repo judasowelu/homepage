@@ -30,8 +30,8 @@ src/index.html
 
 	<!doctype html><script src="//insertUserNodeServerAddress/i"></script>
 
- -&gt; write node server url and upload to index page
- 	if you use public server then don`t modify
+ -&gt; write node server url and upload to index page<br/>
+ if you use public server then don`t modify
 
 ## Developing
 
@@ -56,10 +56,10 @@ src/index.html
 
  -&gt; do not need to modify
 
-run node
+run node<br/>
 &gt; node main.js
 
-go to browser and write address
+go to browser and write address<br/>
 &gt; localhost:3080
 
 
