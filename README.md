@@ -13,7 +13,7 @@ conf/urlDatas.js
 	module.exports = {
 			url : "insertUserNodeServerAddress"
 	}
-	 -&lt; write node server url
+	 -&gt; write node server url
 
 conf/propertys.js
 	module.exports = {
@@ -21,12 +21,12 @@ conf/propertys.js
 			mongodbUrl : "insertUserMongodbAddress"
 			[, mongodbPort : "insertUserMongodbPort"]
 	}
-	 -&lt; write mongodb address
+	 -&gt; write mongodb address
 
 src/index.html
-	&gt;!doctype html&lt;&gt;script src="//insertUserNodeServerAddress/i"&lt;&gt;/script&lt;
+	&lt;!doctype html&gt;&lt;script src="//insertUserNodeServerAddress/i"&gt;&lt;/script&gt;
 
-	 -&lt; write node server url and upload to index page
+	 -&gt; write node server url and upload to index page
 	 	if you use public server then don`t modify
 
 ## Developing
@@ -45,15 +45,15 @@ conf/propertys.js
 	}
 
 src/index.html
-	&gt;!doctype html&lt;&gt;script src="//{{url}}/i"&lt;&gt;/script&lt;
+	&lt;!doctype html&gt;&lt;script src="//{{url}}/i"&gt;&lt;/script&gt;
 
-	-&lt; do not need to modify
+	-&gt; do not need to modify
 
 run node
-&lt; node main.js
+&gt; node main.js
 
 go to browser and write address
-&lt; localhost:3080
+&gt; localhost:3080
 
 
 
