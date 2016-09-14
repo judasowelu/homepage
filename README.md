@@ -33,6 +33,16 @@ src/index.html
  -&gt; write node server url and upload to index page<br/>
  if you use public server then don`t modify
 
+
+write storage
+
+left user name(JudaSowelu in this source code) click and write "sudo su" and enter<br/>
+now you can see edit button on storage page
+
+
+and save your knowhow
+
+
 ## Developing
 
 ex) localhost
