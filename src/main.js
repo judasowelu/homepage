@@ -11,10 +11,23 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+
+var session = require("express-session")({
+    secret: "session_key_ju_secrtete?_yes_yefk?_dd_ef_gdse_e",
+    resave: true,
+    saveUninitialized: true
+});
+var sharedsession = require("express-socket.io-session");
+
+
 var socket = require("./model/socket.js");
 socket.init(io);
 
-app.use(bodyParser({limit: '1mb'}));
+app.use(session);
+io.use(sharedsession(session, {
+    autoSave:true
+}));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {

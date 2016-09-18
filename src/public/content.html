@@ -1,19 +1,5 @@
-<div id="main"><!-- Main -->
+<div id="main" pageId="{{pageId}}"><!-- Main -->
 						<!-- One -->
-	<style>
-	#subPages.edit .editmode {
-		display: inherit;
-		position: absolute;
-		top: -15px;
-		right: 10px;
-		width: 30px;
-		height: 30px;
-		background-image: url("//{{url}}/public/img/x.png");
-	}
-	#subPages.edit li:last-child .editmode {
-		right: -15px;
-	}
-	</style>
 	<section id="edit">
 		<div class="container">
 
@@ -32,7 +18,7 @@
 					<input type="button" value="취소" onclick="page.goView()"><br/><br/>
 					<input type="button" value="</>" onclick="page.contentToggle()"><br/><br/>
 					<label for="filePicker" class="filebox button">
-						업로드
+						사진
 						<input type="file" id="filePicker" onchange="page.imageUpload(this)" value="이미지">
 					</label>
 
@@ -50,26 +36,59 @@
 										<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
 										This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
 										This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
+<pre><code>
+&lt;p&gt;This is &lt;b&gt;bold&lt;/b&gt; and this is &lt;strong&gt;strong&lt;/strong&gt;. This is &lt;i&gt;italic&lt;/i&gt; and this is &lt;em&gt;emphasized&lt;/em&gt;.
+This is &lt;sup&gt;superscript&lt;/sup&gt; text and this is &lt;sub&gt;subscript&lt;/sub&gt; text.
+This is &lt;u&gt;underlined&lt;/u&gt; and this is code: &lt;code&gt;for (;;) { ... }&lt;/code&gt;. Finally, &lt;a href="#"&gt;this is a link&lt;/a&gt;.&lt;/p&gt;
+</code></pre>
 										<hr />
 										<header>
 											<h4>Heading with a Subtitle</h4>
 											<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
 										</header>
+<pre><code>
+&lt;header&gt;
+    &lt;h4&gt;Heading with a Subtitle&lt;/h4&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet nullam id egestas urna aliquam&lt;/p&gt;
+&lt;/header&gt;
+</code></pre>
 										<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+<pre><code>
+&lt;p&gt;Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.&lt;/p&gt;
+</code></pre>
 										<header>
 											<h5>Heading with a Subtitle</h5>
 											<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
 										</header>
+<pre><code>
+&lt;header&gt;
+    &lt;h5&gt;Heading with a Subtitle&lt;/h5&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet nullam id egestas urna aliquam&lt;/p&gt;
+&lt;/header&gt;
+</code></pre>
 										<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+<pre><code>
+&lt;p&gt;Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.&lt;/p&gt;
+</code></pre>
 										<hr />
 										<h2>Heading Level 2</h2>
 										<h3>Heading Level 3</h3>
 										<h4>Heading Level 4</h4>
 										<h5>Heading Level 5</h5>
 										<h6>Heading Level 6</h6>
+<pre><code>
+&lt;h2&gt;Heading Level 2&lt;/h2&gt;
+&lt;h3&gt;Heading Level 3&lt;/h3&gt;
+&lt;h4&gt;Heading Level 4&lt;/h4&gt;
+&lt;h5&gt;Heading Level 5&lt;/h5&gt;
+&lt;h6&gt;Heading Level 6&lt;/h6&gt;
+</code></pre>
 										<hr />
 										<h5>Blockquote</h5>
 										<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+<pre><code>
+&lt;blockquote&gt;Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.&lt;/blockquote&gt;
+</code></pre>
 										<h5>Preformatted</h5>
 										<pre><code>
 i = 0;
@@ -80,7 +99,21 @@ while (!deck.isInOrder()) {
     i++;
 }
 
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+print 'It took ' + i + ' iterations to sort the deck.';
+</code></pre>
+<pre><code>
+&lt;pre&gt;&lt;code&gt;
+i = 0;
+
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 									</section>
 
 									<section>
@@ -93,12 +126,26 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<li>Sagittis adipiscing lorem eleifend.</li>
 													<li>Felis enim feugiat dolore viverra.</li>
 												</ul>
+<pre><code>
+&lt;ul&gt;
+    &lt;li&gt;Dolor pulvinar etiam magna etiam.&lt;/li&gt;
+    &lt;li&gt;Sagittis adipiscing lorem eleifend.&lt;/li&gt;
+    &lt;li&gt;Felis enim feugiat dolore viverra.&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 												<h5>Alternate</h5>
 												<ul class="alt">
 													<li>Dolor pulvinar etiam magna etiam.</li>
 													<li>Sagittis adipiscing lorem eleifend.</li>
 													<li>Felis enim feugiat dolore viverra.</li>
 												</ul>
+<pre><code>
+&lt;ul class="alt"&gt;
+    &lt;li&gt;Dolor pulvinar etiam magna etiam.&lt;/li&gt;
+    &lt;li&gt;Sagittis adipiscing lorem eleifend.&lt;/li&gt;
+    &lt;li&gt;Felis enim feugiat dolore viverra.&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 											</div>
 											<div class="6u 12u(xsmall)">
 												<h5>Ordered</h5>
@@ -110,6 +157,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<li>Etiam vel felis at lorem sed viverra.</li>
 													<li>Felis enim feugiat dolore viverra.</li>
 												</ol>
+<pre><code>
+&lt;ol&gt;
+    &lt;li&gt;Dolor pulvinar etiam magna etiam.&lt;/li&gt;
+    &lt;li&gt;Etiam vel felis at lorem sed viverra.&lt;/li&gt;
+    &lt;li&gt;Felis enim feugiat dolore viverra.&lt;/li&gt;
+    &lt;li&gt;Dolor pulvinar etiam magna etiam.&lt;/li&gt;
+    &lt;li&gt;Etiam vel felis at lorem sed viverra.&lt;/li&gt;
+    &lt;li&gt;Felis enim feugiat dolore viverra.&lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
 												<h5>Icons</h5>
 												<ul class="icons">
 													<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -119,6 +176,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
 													<li><a href="#" class="icon fa-tumblr"><span class="label">Tumblr</span></a></li>
 												</ul>
+<pre><code>
+&lt;ul class="icons"&gt;
+    &lt;li&gt;&lt;a href="#" class="icon fa-twitter"&gt;&lt;span class="label"&gt;Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="icon fa-facebook"&gt;&lt;span class="label"&gt;Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="icon fa-instagram"&gt;&lt;span class="label"&gt;Instagram&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="icon fa-github"&gt;&lt;span class="label"&gt;Github&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="icon fa-dribbble"&gt;&lt;span class="label"&gt;Dribbble&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="icon fa-tumblr"&gt;&lt;span class="label"&gt;Tumblr&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 											</div>
 										</div>
 										<h5>Actions</h5>
@@ -127,11 +194,25 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 											<li><a href="#" class="button">Default</a></li>
 											<li><a href="#" class="button alt">Default</a></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt"&gt;Default&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 										<ul class="actions small">
 											<li><a href="#" class="button special small">Small</a></li>
 											<li><a href="#" class="button small">Small</a></li>
 											<li><a href="#" class="button alt small">Small</a></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions small"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special small"&gt;Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button small"&gt;Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt small"&gt;Small&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 										<div class="row">
 											<div class="3u 6u(medium) 12u$(xsmall)">
 												<ul class="actions vertical">
@@ -139,6 +220,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<li><a href="#" class="button">Default</a></li>
 													<li><a href="#" class="button alt">Default</a></li>
 												</ul>
+<pre><code>
+&lt;ul class="actions vertical"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt"&gt;Default&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 											</div>
 											<div class="3u 6u$(medium) 12u$(xsmall)">
 												<ul class="actions vertical small">
@@ -146,6 +234,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<li><a href="#" class="button small">Small</a></li>
 													<li><a href="#" class="button alt small">Small</a></li>
 												</ul>
+<pre><code>
+&lt;ul class="actions vertical small"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special small"&gt;Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button small"&gt;Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt small"&gt;Small&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 											</div>
 											<div class="3u 6u(medium) 12u$(xsmall)">
 												<ul class="actions vertical">
@@ -153,6 +248,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<li><a href="#" class="button fit">Default</a></li>
 													<li><a href="#" class="button alt fit">Default</a></li>
 												</ul>
+<pre><code>
+&lt;ul class="actions vertical"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special fit"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button fit"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt fit"&gt;Default&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 											</div>
 											<div class="3u 6u$(medium) 12u$(xsmall)">
 												<ul class="actions vertical small">
@@ -160,6 +262,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<li><a href="#" class="button small fit">Small</a></li>
 													<li><a href="#" class="button alt small fit">Small</a></li>
 												</ul>
+<pre><code>
+&lt;ul class="actions vertical small"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special small fit"&gt;Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button small fit"&gt;Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt small fit"&gt;Small&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 											</div>
 										</div>
 									</section>
@@ -211,6 +320,52 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 												</tfoot>
 											</table>
 										</div>
+<pre><code>
+&lt;div class="table-wrapper"&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Description&lt;/th&gt;
+                &lt;th&gt;Price&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item One&lt;/td&gt;
+                &lt;td&gt;Ante turpis integer aliquet porttitor.&lt;/td&gt;
+                &lt;td&gt;29.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Two&lt;/td&gt;
+                &lt;td&gt;Vis ac commodo adipiscing arcu aliquet.&lt;/td&gt;
+                &lt;td&gt;19.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Three&lt;/td&gt;
+                &lt;td&gt; Morbi faucibus arcu accumsan lorem.&lt;/td&gt;
+                &lt;td&gt;29.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Four&lt;/td&gt;
+                &lt;td&gt;Vitae integer tempus condimentum.&lt;/td&gt;
+                &lt;td&gt;19.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Five&lt;/td&gt;
+                &lt;td&gt;Ante turpis integer aliquet porttitor.&lt;/td&gt;
+                &lt;td&gt;29.99&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tfoot&gt;
+            &lt;tr&gt;
+                &lt;td colspan="2"&gt;&lt;/td&gt;
+                &lt;td&gt;100.00&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tfoot&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+</code></pre>
 
 										<h5>Alternate</h5>
 										<div class="table-wrapper">
@@ -257,6 +412,52 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 												</tfoot>
 											</table>
 										</div>
+<pre><code>
+&lt;div class="table-wrapper"&gt;
+    &lt;table class="alt"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Description&lt;/th&gt;
+                &lt;th&gt;Price&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item One&lt;/td&gt;
+                &lt;td&gt;Ante turpis integer aliquet porttitor.&lt;/td&gt;
+                &lt;td&gt;29.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Two&lt;/td&gt;
+                &lt;td&gt;Vis ac commodo adipiscing arcu aliquet.&lt;/td&gt;
+                &lt;td&gt;19.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Three&lt;/td&gt;
+                &lt;td&gt; Morbi faucibus arcu accumsan lorem.&lt;/td&gt;
+                &lt;td&gt;29.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Four&lt;/td&gt;
+                &lt;td&gt;Vitae integer tempus condimentum.&lt;/td&gt;
+                &lt;td&gt;19.99&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Item Five&lt;/td&gt;
+                &lt;td&gt;Ante turpis integer aliquet porttitor.&lt;/td&gt;
+                &lt;td&gt;29.99&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tfoot&gt;
+            &lt;tr&gt;
+                &lt;td colspan="2"&gt;&lt;/td&gt;
+                &lt;td&gt;100.00&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tfoot&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+</code></pre>
 									</section>
 
 									<section>
@@ -266,31 +467,73 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 											<li><a href="#" class="button">Default</a></li>
 											<li><a href="#" class="button alt">Alternate</a></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special"&gt;Special&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt"&gt;Alternate&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 										<ul class="actions">
 											<li><a href="#" class="button special big">Big</a></li>
 											<li><a href="#" class="button">Default</a></li>
 											<li><a href="#" class="button alt small">Small</a></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special big"&gt;Big&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button"&gt;Default&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt small"&gt;Small&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 										<ul class="actions fit">
 											<li><a href="#" class="button special fit">Fit</a></li>
 											<li><a href="#" class="button fit">Fit</a></li>
 											<li><a href="#" class="button alt fit">Fit</a></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions fit"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special fit"&gt;Fit&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button fit"&gt;Fit&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt fit"&gt;Fit&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 										<ul class="actions fit small">
 											<li><a href="#" class="button special fit small">Fit + Small</a></li>
 											<li><a href="#" class="button fit small">Fit + Small</a></li>
 											<li><a href="#" class="button alt fit small">Fit + Small</a></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions fit small"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special fit small"&gt;Fit + Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button fit small"&gt;Fit + Small&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt fit small"&gt;Fit + Small&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 										<ul class="actions">
 											<li><a href="#" class="button special icon fa-download">Icon</a></li>
 											<li><a href="#" class="button icon fa-download">Icon</a></li>
 											<li><a href="#" class="button alt icon fa-check">Icon</a></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions"&gt;
+    &lt;li&gt;&lt;a href="#" class="button special icon fa-download"&gt;Icon&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button icon fa-download"&gt;Icon&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="button alt icon fa-check"&gt;Icon&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 										<ul class="actions">
 											<li><span class="button special disabled">Special</span></li>
 											<li><span class="button disabled">Default</span></li>
 											<li><span class="button alt disabled">Alternate</span></li>
 										</ul>
+<pre><code>
+&lt;ul class="actions"&gt;
+    &lt;li&gt;&lt;span class="button special disabled"&gt;Special&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="button disabled"&gt;Default&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="button alt disabled"&gt;Alternate&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
 									</section>
 
 									<section>
@@ -304,6 +547,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
 												</div>
 											</div>
+<pre><code>
+&lt;div class="row uniform"&gt;
+    &lt;div class="6u 12u(xsmall)"&gt;
+        &lt;input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" /&gt;
+    &lt;/div&gt;
+    &lt;div class="6u 12u(xsmall)"&gt;
+        &lt;input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 											<div class="row uniform">
 												<div class="12u">
 													<div class="select-wrapper">
@@ -317,6 +570,21 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													</div>
 												</div>
 											</div>
+<pre><code>
+&lt;div class="row uniform"&gt;
+    &lt;div class="12u"&gt;
+        &lt;div class="select-wrapper"&gt;
+            &lt;select name="demo-category" id="demo-category"&gt;
+                &lt;option value=""&gt;- Category -&lt;/option&gt;
+                &lt;option value="1"&gt;Manufacturing&lt;/option&gt;
+                &lt;option value="1"&gt;Shipping&lt;/option&gt;
+                &lt;option value="1"&gt;Administration&lt;/option&gt;
+                &lt;option value="1"&gt;Human Resources&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 											<div class="row uniform">
 												<div class="4u 12u(medium)">
 													<input type="radio" id="demo-priority-low" name="demo-priority" checked>
@@ -331,6 +599,22 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<label for="demo-priority-high">High Priority</label>
 												</div>
 											</div>
+<pre><code>
+&lt;div class="row uniform"&gt;
+    &lt;div class="4u 12u(medium)"&gt;
+        &lt;input type="radio" id="demo-priority-low" name="demo-priority" checked&gt;
+        &lt;label for="demo-priority-low"&gt;Low Priority&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="4u 12u(medium)"&gt;
+        &lt;input type="radio" id="demo-priority-normal" name="demo-priority"&gt;
+        &lt;label for="demo-priority-normal"&gt;Normal Priority&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="4u 12u(medium)"&gt;
+        &lt;input type="radio" id="demo-priority-high" name="demo-priority"&gt;
+        &lt;label for="demo-priority-high"&gt;High Priority&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 											<div class="row uniform">
 												<div class="6u 12u(medium)">
 													<input type="checkbox" id="demo-copy" name="demo-copy">
@@ -341,11 +625,30 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													<label for="demo-human">I am a human and not a robot</label>
 												</div>
 											</div>
+<pre><code>
+&lt;div class="row uniform"&gt;
+    &lt;div class="6u 12u(medium)"&gt;
+        &lt;input type="checkbox" id="demo-copy" name="demo-copy"&gt;
+        &lt;label for="demo-copy"&gt;Email me a copy of this message&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="6u 12u(medium)"&gt;
+        &lt;input type="checkbox" id="demo-human" name="demo-human" checked&gt;
+        &lt;label for="demo-human"&gt;I am a human and not a robot&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 											<div class="row uniform">
 												<div class="12u">
 													<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
 												</div>
 											</div>
+<pre><code>
+&lt;div class="row uniform"&gt;
+    &lt;div class="12u"&gt;
+        &lt;textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 											<div class="row uniform">
 												<div class="12u">
 													<ul class="actions">
@@ -354,6 +657,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 													</ul>
 												</div>
 											</div>
+<pre><code>
+&lt;div class="row uniform"&gt;
+    &lt;div class="12u"&gt;
+        &lt;ul class="actions"&gt;
+            &lt;li&gt;&lt;input type="submit" value="Send Message" /&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;input type="reset" value="Reset" class="alt" /&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 										</form>
 									</section>
 
@@ -361,6 +674,9 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 										<h4>Image</h4>
 										<h5>Fit</h5>
 										<span class="image fit"><img src="//{{url}}/images/banner.jpg" alt="" /></span>
+<pre><code>
+&lt;span class="image fit"&gt;&lt;img src="//{{url}}/images/banner.jpg" alt="" /&gt;&lt;/span&gt;
+</code></pre>
 										<div class="box alt">
 											<div class="row 50% uniform">
 												<div class="4u"><span class="image fit"><img src="//{{url}}/images/pic01.jpg" alt="" /></span></div>
@@ -378,15 +694,31 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 												<div class="4u"><span class="image fit"><img src="//{{url}}/images/pic02.jpg" alt="" /></span></div>
 											</div>
 										</div>
+<pre><code>
+&lt;div class="row 50% uniform"&gt;
+    &lt;div class="4u"&gt;&lt;span class="image fit"&gt;&lt;img src="//{{url}}/images/pic01.jpg" alt="" /&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="4u"&gt;&lt;span class="image fit"&gt;&lt;img src="//{{url}}/images/pic02.jpg" alt="" /&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="4u"&gt;&lt;span class="image fit"&gt;&lt;img src="//{{url}}/images/pic03.jpg" alt="" /&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 										<h5>Left &amp; Right</h5>
 										<p><span class="image left"><img src="//{{url}}/images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+<pre><code>
+&lt;p&gt;
+    &lt;span class="image left"&gt;&lt;img src="//{{url}}/images/avatar.jpg" alt="" /&gt;&lt;/span&gt;
+    Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.
+&lt;/p&gt;
+</code></pre>
 										<p><span class="image right"><img src="//{{url}}/images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+<pre><code>
+&lt;p&gt;
+    &lt;span class="image right"&gt;&lt;img src="//{{url}}/images/avatar.jpg" alt="" /&gt;&lt;/span&gt;
+    Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.
+&lt;/p&gt;
+</code></pre>
 									</section>
 
 								</div>
 							</section>
 
-	<script type="text/javascript">
-		requestPage ();
-	</script>
 </div>

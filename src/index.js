@@ -26,7 +26,7 @@ scriptTag(homeurl+"/public/js/jquery/jquery-2.1.1.min.js", function () {
 });
 
 function hasPage (url) {
-	if (url.indexOf(".page") > 0) {
+	if (url.indexOf(".") > 0) {
 		return true;
 	}
 	return false;
@@ -35,18 +35,9 @@ function hasPage (url) {
 function setActiveMenu () {
 	hash = window.location.hash.substr(1);
 	if (hasPage(hash)) {
-		$("[href='#top.page']").addClass("active");
+		$("[href^='#top']").addClass("active");
 	} else {
 		$("[href='#one']").addClass("active");
-	}
-}
-
-function requestPage () {
-	var path = window.location.hash.substr(1);
-	if (path.indexOf(".page") > 0) {
-		socket.emit('page data', {pageId : path.replace(".page", "")});
-	} else {
-		socket.emit('page data', data);
 	}
 }
 
@@ -55,27 +46,28 @@ function initSocket () {
 	socket = io.connect(homeurl);
 	socket.on('head append', function(m) {
 		$("head").append(m);
-		socket.emit("hash", window.location.hash.substr(1));
 	});
 	
 	socket.on('script append', function(m) {
 		loadjscssfile(homeurl + "/assets/js/" + m, "js")
 	});
 	
+	socket.on('head ready', function() {
+		socket.emit("hash", window.location.hash.substr(1));
+	});
+	
 	socket.on('body', function(m) {
 		$("body").append(m);
 		$("#nav a").removeClass("active");
-		
-		setActiveMenu();		
-	});
-	
-	socket.on('wrapper', function(m) {
-		$("#main").remove();
-		$("#wrapper").prepend(m);
+
+		setActiveMenu();
 	});
 
-	socket.on('page data', function (data) {
-		page.load(data);
+	socket.on('wrapper', function(m) {
+		var $wrapper = $(m.wrapper);
+		page.load($wrapper, m.pageData);
+		$("#wrapper #container").append($wrapper);
+		$("#navi").append("<li><a href=\"javascript:\" class=\"button fit\" onclick=\"naviMoveTo('"+m.pageId+"')\">"+(m.pageId==""?"main":m.pageId)+"</a></li>")
 	});
 
 	socket.on('done add sub page', function (data) {
@@ -97,4 +89,14 @@ function initSocket () {
 function login () {
 	var pass = prompt("root permission");
 	socket.emit("login", pass);
+}
+
+function naviMoveTo (pageId) {
+	var $target = $('#main[pageId="'+pageId+'"]');
+	var $wrapper = $('#wrapper');
+	var $container = $("#container");
+	$container.scrollLeft($target.offset().left - $wrapper.css("paddingLeft").replace(/[^-\d\.]/g, '') + $container.scrollLeft())
+//    $('#wrapper').animate({
+//        scrollLeft: $target.offset().left},
+//        'slow');
 }

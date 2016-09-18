@@ -21,7 +21,8 @@ var hash = window.location.hash.substr(1);
 window.onhashchange = function() {
 	var _hash = window.location.hash.substr(1);
 	
-	if (hasPage(hash) && !hasPage(_hash) || hasPage(_hash)
+	if ((hasPage(hash) && !hasPage(_hash))
+			|| hasPage(_hash)
 			) {
 		requestStorage();
 	}

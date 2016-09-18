@@ -74,8 +74,8 @@ page.imageResize = function($image, callback) {
 	canvas.height = height;
 	var ctx = canvas.getContext("2d");
 	ctx.drawImage(img, 0, 0, width, height);
-	
-	
+
+
 	var imgData = canvas.toDataURL("image/png");
 	$.ajax({
 		url : homeurl + "/imageUpload",
@@ -101,7 +101,7 @@ page.imageUpload = function(input) {
 
 			page.imageResize($image, function ($image) {
 				var $span = $("<span class='image fit'>");
-				$span.append($image)
+				$span.append($image);
 				$('#content ').append($span);
 			});
 		};
@@ -110,4 +110,4 @@ page.imageUpload = function(input) {
 
 };
 
-$("body").addClass("admin")
+$("body").addClass("admin");

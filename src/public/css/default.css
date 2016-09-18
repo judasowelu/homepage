@@ -1,5 +1,27 @@
+html,body{
+	width: 100%;
+}
+#container {
+	white-space:nowrap;
+	overflow-x: auto;
+}
+#navi {
+}
+#main {
+	width: 100%;
+	display: inline-block;
+	white-space: initial;
+	vertical-align:top;
+}
+#header {
+	z-index: 10;
+}
+
+#edit .container {
+	position: relative;
+}
 .toolArea {
-  position: fixed;
+  position: absolute;
   overflow-x: hidden;
   right:0;
   top:6px;
@@ -27,19 +49,32 @@
 }
 #subPages li {
 	position: relative;
+	margin-bottom:10px;
 }
 
 #five {display: none;}
 
 .toolArea label.filebox input[type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip:rect(0,0,0,0);
-  border: 0;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip:rect(0,0,0,0);
+	border: 0;
+}
+
+#subPages.edit .editmode {
+	display: inherit;
+	position: absolute;
+	top: -15px;
+	right: 10px;
+	width: 30px;
+	height: 30px;
+}
+#subPages.edit li:last-child .editmode {
+	right: -15px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -48,3 +83,22 @@
 	}
 }
 
+@media screen and (max-width: 480px) {
+	#subPages li {
+		margin-bottom:1px;
+	}
+
+	#subPages.edit .editmode {
+		top: 0px;
+		right: -15px;
+		width: 30px;
+		height: 30px;
+	}
+	#subPages.edit li:last-child .editmode {
+		right: -15px;
+	}
+	#subPages.edit li:first-child .editmode {
+		top: -15px;
+	}
+
+}

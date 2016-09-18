@@ -9,23 +9,32 @@ module.exports = {
 		var top = module.exports.urlChanger(fs.readFileSync(webContentDir+"page/top.html", "utf-8"));
 	    top += module.exports.urlChanger(fs.readFileSync("./public/header.html", "utf-8"));
 	    var wrapper = module.exports.urlChanger(fs.readFileSync(webContentDir+"page/wrapper.html", "utf-8"));
+	    var admin = '<script type="text/javascript" src="//{{url}}/public/js/admin.js"></script>';
 
 		io.on('connection', function (socket) {
-			socket.on('hash', function(msg) {
-				if (msg.indexOf(".page") > 0) {
-					msg = "./public/content.html";
-				} else {
-					msg = webContentDir+"index.html";
-				}
-			    fs.readFile(msg, "utf-8", function (err, content) {
-					socket.emit('wrapper', module.exports.urlChanger(content));
-			    });
-			});
+			socket.on('hash', function(path) {
 
-			socket.on('page data', function (data) {
-				mongodb.getPageData(data, function (data) {
-					socket.emit("page data", data);
-				});
+				var url = webContentDir+"index.html";
+				var pageId = "";
+				if (path.indexOf(".") > 0) {
+					url = "./public/content.html";
+
+					pageId = path;
+					var lastIndex = path.lastIndexOf(".");
+					var pageName = path.substring(0, lastIndex);
+				}
+
+				var userData = {pageId : pageId};
+
+				fs.readFile(url, "utf-8", function (err, content) {
+					mongodb.getPageData({pageId : pageName}, function (data) {
+						socket.emit('wrapper', {
+							"pageId" : pageId,
+							"wrapper" : module.exports.urlChanger(content, userData),
+							"pageData" : data
+						});
+					});
+			    });
 			});
 
 			socket.on('save page', function (data) {
@@ -47,23 +56,31 @@ module.exports = {
 			});
 
 			socket.emit('clean');
-			socket.emit('body', top);
-			socket.emit('body', wrapper);
+			socket.emit('body', top+wrapper);
 			fs.readFile(webContentDir+"page/header.html", "UTF-8", function (err, content) {
 				socket.emit('head append', module.exports.urlChanger(content));
+				if (socket.handshake.session.userdata) {
+					var userdata = socket.handshake.session.userdata;
+					socket.emit('head append', module.exports.urlChanger(admin));
+				}
+				socket.emit('head ready');
 			});
 
 			socket.on('login', function(pass) {
 				if (pass == "sudo su") {
-					var admin = '<script type="text/javascript" src="//{{url}}/public/js/admin.js"></script>';
 					socket.emit('head append', module.exports.urlChanger(admin));
 					socket.isAdmin = true;
+					socket.handshake.session.userdata = {};
+					socket.handshake.session.userdata.userId = "JudaSowelu";
 				}
 			});
 		});
 	},
-    urlChanger : function (content) {
+    urlChanger : function (content, userData) {
     	content = content.replace(/\{\{([a-zA-Z0-1_-]*)\}\}/g, function (text, key) {
+    		if (typeof userData !== "undefined" && userData.hasOwnProperty(key)) {
+    			return userData[key];
+    		}
     		if (GLOBAL.urlDatas.hasOwnProperty(key)) {
     			return GLOBAL.urlDatas[key];
     		}
