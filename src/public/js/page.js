@@ -21,9 +21,15 @@ var page = {
 
 	getLinkSubPage : function(pageId, subPageId) {
 		return "<li><a class=\"button alt small\" href='#" + subPageId + ".page'>#" + subPageId + "</a>" +
-				"<a class='editmode' href='javascript:' onclick='page.removeSubPage(\"" + pageId + "\", \"" + subPageId + "\")'></a></li>"
+				"<a class='editmode xbutton' href='javascript:' onclick='page.removeSubPage(\"" + pageId + "\", \"" + subPageId + "\")'></a></li>"
 				;
+	},
+	
+	closePage : function (pageId) {
+		$("#main[pageId='"+pageId+"']").remove();
+		$("#navi [pageId='"+pageId+"']").parent().remove();
 	}
 
+	
 }
 ;

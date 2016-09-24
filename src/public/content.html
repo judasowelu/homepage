@@ -2,27 +2,28 @@
 						<!-- One -->
 	<section id="edit">
 		<div class="container">
-
+			<a href="javascript:" onclick="page.closePage('{{pageId}}')" class="xbutton closePage" ></a>
+			
 			<input type="hidden" id="pageId" />
 			<h2 id="headLine"></h2>
 			<div id="content"></div>
 			<h3>Tags</h3>
 			<ul class="actions" id="subPages"></ul>
-			<div class="toolArea">
-				<div class="viewToolBox">
-					<input type="button" value="편집" onclick="page.goEdit('{{pageId}}')"><br/><br/>
-					<input type="button" value="Tags" onclick="page.addSubPage('{{pageId}}')">
-				</div>
-				<div class="editToolBox">
-					<input type="button" value="저장" onclick="page.save('{{pageId}}')"><br/><br/>
-					<input type="button" value="취소" onclick="page.goView('{{pageId}}')"><br/><br/>
-					<input type="button" value="</>" onclick="page.contentToggle('{{pageId}}')"><br/><br/>
-					<label for="filePicker" class="filebox button">
-						사진
-						<input type="file" id="filePicker" onchange="page.imageUpload('{{pageId}}', this)" value="이미지">
-					</label>
+		</div>
+		<div class="toolArea">
+			<div class="viewToolBox">
+				<input type="button" value="편집" onclick="page.goEdit('{{pageId}}')"><br/><br/>
+				<input type="button" value="Tags" onclick="page.addSubPage('{{pageId}}')">
+			</div>
+			<div class="editToolBox">
+				<input type="button" value="저장" onclick="page.save('{{pageId}}')"><br/><br/>
+				<input type="button" value="취소" onclick="page.goView('{{pageId}}')"><br/><br/>
+				<input type="button" value="</>" onclick="page.contentToggle('{{pageId}}')"><br/><br/>
+				<label for="filePicker" class="filebox button">
+					사진
+					<input type="file" id="filePicker" onchange="page.imageUpload('{{pageId}}', this)" value="이미지">
+				</label>
 
-				</div>
 			</div>
 		</div>
 	</section>

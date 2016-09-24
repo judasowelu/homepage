@@ -83,6 +83,13 @@ module.exports = {
 			callback(doc);
 		});
 	}
+	,
+	getAllTags : function (data, callback) {
+		this.db.collection('page').find({}, [ "subPages" ]).toArray(function(err,doc){
+			if(err) throw err;
+			callback(doc);
+		});
+	}
 
 	/**
 	 * user function
@@ -103,5 +110,6 @@ module.exports = {
 			});
 		});
 	}
+
 };
 

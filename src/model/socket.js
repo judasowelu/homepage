@@ -17,12 +17,39 @@ module.exports = {
 			socket.on('hash', function(path) {
 
 				var url = webContentDir+"index.html";
-				var pageId = "main";
-				if (path.indexOf(".") > 0) {
+				var pageId = "mainPage";
+				if (path == "mapPage") {
+					pageId = "mapPage";
+					mongodb.getAllTags({}, function (arr) {
+						console.log(arr);
+						
+						var linkData = [];
+						for ( var iter in arr) {
+							
+							var subPages = arr[iter].subPages
+							if (typeof subPages !== "undefined") {
+								for ( var iterPage in subPages) {
+									linkData.push({
+										source: arr[iter]._id,
+										target: subPages[iterPage]
+									});
+								}
+							}
+						}
+
+						module.exports.loadPage(pageId, function (data) {
+							socket.emit('wrapper', data);
+						}, url, {
+							linkData : JSON.stringify(linkData)
+						});
+					});
+					url = "./public/map.html";
+					return;
+				} else if (path.indexOf(".") > 0) {
 					url = "./public/content.html";
 					pageId = path;
 				}
-				
+
 				module.exports.loadPage(pageId, function (data) {
 					socket.emit('wrapper', data);
 				}, url);
@@ -83,12 +110,15 @@ module.exports = {
 			});
 		});
 	},
-    loadPage : function (pageId, callback, url) {
+    loadPage : function (pageId, callback, url, userData) {
     	if (typeof url === "undefined") {
     		url = "./public/content.html"
     	}
 
-		var userData = {pageId : pageId};
+    	if (typeof userData === "undefined") {
+    		userData = {};
+    	}
+		userData.pageId = pageId;
 
 		module.exports.fs.readFile(url, "utf-8", function (err, content) {
 			module.exports.mongodb.getPageData({pageId : pageId}, function (data) {
