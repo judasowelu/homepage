@@ -1,22 +1,22 @@
 var page = page;
 var $ = $;
 
-page.goEdit = function() {
-	$("#headLine").attr("contenteditable", "true");
-	$("#content").attr("contenteditable", "true");
-	$(".toolArea").addClass("edit");
-	$("#subPages").addClass("edit");
-	$("#five").show();
+page.goEdit = function(pageId) {
+	$("#main[pageId='"+pageId+"'] #headLine").attr("contenteditable", "true");
+	$("#main[pageId='"+pageId+"'] #content").attr("contenteditable", "true");
+	$("#main[pageId='"+pageId+"'] .toolArea").addClass("edit");
+	$("#main[pageId='"+pageId+"'] #subPages").addClass("edit");
+	$("#main[pageId='"+pageId+"'] #five").show();
 };
 
-page.goView = function() {
+page.goView = function(pageId) {
 	if (confirm("변경사항이 저장되지 않습니다.")) {
 		requestStorage();
 	}
 };
 
-page.contentToggle = function() {
-	var c = $("#content");
+page.contentToggle = function(pageId) {
+	var c = $("#main[pageId='"+pageId+"'] #content");
 	if (c[0].tagName === "DIV") {
 		c.replaceWith('<textarea id="content">' + c.html() + '</textarea>');
 	} else {
@@ -24,29 +24,29 @@ page.contentToggle = function() {
 	}
 }
 
-page.addSubPage = function() {
+page.addSubPage = function(pageId) {
 	var subPageId = prompt("페이지 아이디를 입력");
 	if (subPageId == null) {
 		alert("페이지 아이디가 필요함");
 	} else {
-		addSubPage(subPageId);
+		addSubPage(pageId, subPageId);
 	}
 
 };
 
-page.removeSubPage = function(subPageId) {
-	removeSubPage(subPageId);
+page.removeSubPage = function(pageId, subPageId) {
+	removeSubPage(pageId, subPageId);
 };
 
-page.save = function() {
-	var c = $("#content");
+page.save = function(pageId) {
+	var c = $("#main[pageId='"+pageId+"'] #content");
 	if (c[0].tagName !== "DIV") {
 		c.replaceWith('<div id="content" contenteditable=true>' + c.val() + '</div>');
 	}
 	savePage({
-		pageId : $("#pageId").val(),
-		headLine : encodeURI($("#headLine").html()),
-		content : encodeURI($("#content").html())
+		pageId : $("#main[pageId='"+pageId+"'] #pageId").val(),
+		headLine : encodeURI($("[pageId='"+pageId+"'] #headLine").html()),
+		content : encodeURI($("[pageId='"+pageId+"'] #content").html())
 	});
 };
 
@@ -92,7 +92,7 @@ page.imageResize = function($image, callback) {
 
 };
 
-page.imageUpload = function(input) {
+page.imageUpload = function(pageId, input) {
 	if (input.files && input.files[0]) {
 		var FR = new FileReader();
 		FR.onload = function(e) {
@@ -102,7 +102,7 @@ page.imageUpload = function(input) {
 			page.imageResize($image, function ($image) {
 				var $span = $("<span class='image fit'>");
 				$span.append($image);
-				$('#content ').append($span);
+				$("#main[pageId='"+pageId+"'] #content").append($span);
 			});
 		};
 		FR.readAsDataURL(input.files[0]);

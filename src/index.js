@@ -47,15 +47,15 @@ function initSocket () {
 	socket.on('head append', function(m) {
 		$("head").append(m);
 	});
-	
+
 	socket.on('script append', function(m) {
 		loadjscssfile(homeurl + "/assets/js/" + m, "js")
 	});
-	
+
 	socket.on('head ready', function() {
 		socket.emit("hash", window.location.hash.substr(1));
 	});
-	
+
 	socket.on('body', function(m) {
 		$("body").append(m);
 		$("#nav a").removeClass("active");
@@ -64,10 +64,11 @@ function initSocket () {
 	});
 
 	socket.on('wrapper', function(m) {
-		var $wrapper = $(m.wrapper);
-		page.load($wrapper, m.pageData);
-		$("#wrapper #container").append($wrapper);
-		$("#navi").append("<li><a href=\"javascript:\" class=\"button fit\" onclick=\"naviMoveTo('"+m.pageId+"')\">"+(m.pageId==""?"main":m.pageId)+"</a></li>")
+		if (typeof page === "undefined") {
+			delayAppendWrapper(m);
+		} else {
+			appendWrapper(m);
+		}
 	});
 
 	socket.on('done add sub page', function (data) {
@@ -81,9 +82,28 @@ function initSocket () {
 	socket.on('done save page', function (data) {
 		requestStorage ();
 	});
+
 	socket.on('clean', function () {
 		$("html").html("");
 	});
+}
+
+function delayAppendWrapper (m) {
+	if (typeof page === "undefined") {
+		setTimeout(function () {
+			delayAppendWrapper(m);
+		}, 100);
+	} else {
+		appendWrapper(m);
+	}
+}
+
+function appendWrapper (m) {
+	var $wrapper = $(m.wrapper);
+	page.load($wrapper, m.pageData, m.pageId);
+	$("#wrapper #container").append($wrapper);
+	$("#navi").append("<li><a href=\"#"+m.pageId+"\" pageId=\""+m.pageId+"\" class=\"button alt fit small\" \">"+(m.pageId==""?"main":m.pageId)+"</a></li>")
+	naviMoveTo (m.pageId)
 }
 
 function login () {
@@ -95,8 +115,14 @@ function naviMoveTo (pageId) {
 	var $target = $('#main[pageId="'+pageId+'"]');
 	var $wrapper = $('#wrapper');
 	var $container = $("#container");
-	$container.scrollLeft($target.offset().left - $wrapper.css("paddingLeft").replace(/[^-\d\.]/g, '') + $container.scrollLeft())
-//    $('#wrapper').animate({
-//        scrollLeft: $target.offset().left},
-//        'slow');
+	
+	if (pageId !== "") {
+		$("body").animate({
+			scrollTop : 0
+		}, 'fast');
+	}
+	
+    $container.animate({
+			scrollLeft: $target.offset().left - $wrapper.css("paddingLeft").replace(/[^-\d\.]/g, '') + $container.scrollLeft()
+	}, 'fast');
 }

@@ -4,8 +4,29 @@ html,body{
 #container {
 	white-space:nowrap;
 	overflow-x: auto;
+	overflow-y: hidden;
+	padding-top: 2.18em;
 }
-#navi {
+#naviCase {
+	position : fixed;
+	top: 0;
+	right: 0;
+	left: 23em;
+	margin-left: 9px;
+	height: 2.18em;
+	background-color: #fff;
+	margin: 0;
+	z-index: 11;
+}
+ul#navi.actions.fit.small {
+	position : absolute;
+	left: 9px;
+	right: 0;
+	width: calc(100% - 9px);
+}
+#navi li a{
+	margin: 0;
+	overflow: hidden;
 }
 #main {
 	width: 100%;
@@ -77,10 +98,30 @@ html,body{
 	right: -15px;
 }
 
+@media screen and (max-width: 1680px) {
+	#naviCase {
+		left: 21em;
+	}
+	
+}
+
+@media screen and (max-width: 1280px) {
+	#naviCase {
+		left: 20em;
+	}
+}
+
 @media screen and (max-width: 1024px) {
+	#naviCase {
+		top: 44px;
+		left : 1px;
+	}
 	.toolArea {
 		top: 50px;
 	}
+}
+
+@media screen and (max-width: 736px) {
 }
 
 @media screen and (max-width: 480px) {

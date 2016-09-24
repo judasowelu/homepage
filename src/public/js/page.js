@@ -1,5 +1,5 @@
 var page = {
-	load : function($target, data) {
+	load : function($target, data, pageId) {
 		if (typeof data === "undefined") {
 			data = target;
 			$target = $("body");
@@ -14,14 +14,14 @@ var page = {
 
 			var $subPages = $target.find("#subPages");
 			for ( var i in data.pageData.subPages) {
-				$subPages.append(page.getLinkSubPage(data.pageData.subPages[i]));
+				$subPages.append(page.getLinkSubPage(pageId, data.pageData.subPages[i]));
 			}
 		}
 	},
 
-	getLinkSubPage : function(subPageId) {
+	getLinkSubPage : function(pageId, subPageId) {
 		return "<li><a class=\"button alt small\" href='#" + subPageId + ".page'>#" + subPageId + "</a>" +
-				"<a class='editmode' href='javascript:' onclick='page.removeSubPage(\"" + subPageId + "\")'></a></li>"
+				"<a class='editmode' href='javascript:' onclick='page.removeSubPage(\"" + pageId + "\", \"" + subPageId + "\")'></a></li>"
 				;
 	}
 

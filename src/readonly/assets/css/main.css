@@ -2803,7 +2803,7 @@
 
 				#titleBar .toggle {
 					text-decoration: none;
-					height: 4em;
+/* 					height: 4em; */
 					position: absolute;
 					top: 0;
 					width: 6em;
@@ -2985,7 +2985,7 @@
 			}
 
 			#titleBar .toggle {
-				height: 4em;
+/* 				height: 4em; */
 				width: 6em;
 			}
 
