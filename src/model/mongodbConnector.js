@@ -1,3 +1,11 @@
+function getPageName (pageId) {
+	var lastIndex = pageId.lastIndexOf(".");
+	if (lastIndex > 0) {
+		return pageId.substring(0, lastIndex);
+	}
+	return pageId;
+}
+
 module.exports = {
 	init : function () {
 		var MongoClient = require('mongodb').MongoClient
@@ -19,7 +27,9 @@ module.exports = {
 	 */
 	,
 	getPageData: function (data, callback) {
-		this.db.collection('page').findOne({_id : data.pageId}, function(err,doc){
+		var pageName = getPageName(data.pageId);
+
+		this.db.collection('page').findOne({_id : pageName}, function(err,doc){
 			if(err) throw err;
 			if (doc != null) {
 				delete doc._id;
@@ -32,7 +42,9 @@ module.exports = {
 		});
 	},
 	savePage : function (data, callback) {
-		var _id = data.pageId;
+		var pageId = data.pageId;
+		var pageName = getPageName(pageId);
+		var _id = pageName;
 		delete data.pageId;
 
 		if (_id == "") {
@@ -50,8 +62,9 @@ module.exports = {
 		}
 	},
 	addSubPage : function (data, callback) {
-
-		var _id = data.pageId;
+		var pageId = data.pageId;
+		var pageName = getPageName(pageId);
+		var _id = pageName;
 		delete data.pageId;
 
 		this.db.collection('page').update({_id:_id}, {$addToSet:{"subPages":data.subPageId}}, function(err, doc){
@@ -60,8 +73,9 @@ module.exports = {
 		});
 	},
 	removeSubPage : function (data, callback) {
-
-		var _id = data.pageId;
+		var pageId = data.pageId;
+		var pageName = getPageName(pageId);
+		var _id = pageName;
 		delete data.pageId;
 
 		this.db.collection('page').update({_id:_id}, {$pull:{"subPages":data.subPageId}}, function(err, doc){
@@ -75,7 +89,7 @@ module.exports = {
 	 * */
 	,
 	getUser : function (data, callback) {
-		
+
 		data._id = data.userId.toLowerCase();
 		this.db.collection('user').findOne({_id : data._id}, function(err,doc){
 			if(err) throw err;

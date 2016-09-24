@@ -1,63 +1,70 @@
 module.exports = {
 	init : function (io) {
-		var fs = require('fs');
+		module.exports.fs = require('fs');
 
 		var mongodb = require("./mongodbConnector.js");
+		module.exports.mongodb = mongodb;
 		mongodb.init();
 
 		var webContentDir = "./"+GLOBAL.propertys.cssName+"/";
-		var top = module.exports.urlChanger(fs.readFileSync(webContentDir+"page/top.html", "utf-8"));
-	    top += module.exports.urlChanger(fs.readFileSync("./public/header.html", "utf-8"));
-	    var wrapper = module.exports.urlChanger(fs.readFileSync(webContentDir+"page/wrapper.html", "utf-8"));
+		module.exports.webContentDir = webContentDir;
+		var top = module.exports.urlChanger(module.exports.fs.readFileSync(webContentDir+"page/top.html", "utf-8"));
+	    top += module.exports.urlChanger(module.exports.fs.readFileSync("./public/header.html", "utf-8"));
+	    var wrapper = module.exports.urlChanger(module.exports.fs.readFileSync(webContentDir+"page/wrapper.html", "utf-8"));
 	    var admin = '<script type="text/javascript" src="//{{url}}/public/js/admin.js"></script>';
 
 		io.on('connection', function (socket) {
 			socket.on('hash', function(path) {
 
 				var url = webContentDir+"index.html";
-				var pageId = "";
+				var pageId = "main";
 				if (path.indexOf(".") > 0) {
 					url = "./public/content.html";
-
 					pageId = path;
-					var lastIndex = path.lastIndexOf(".");
-					var pageName = path.substring(0, lastIndex);
 				}
+				
+				module.exports.loadPage(pageId, function (data) {
+					socket.emit('wrapper', data);
+				}, url);
+			});
 
-				var userData = {pageId : pageId};
-
-				fs.readFile(url, "utf-8", function (err, content) {
-					mongodb.getPageData({pageId : pageName}, function (data) {
-						socket.emit('wrapper', {
-							"pageId" : pageId,
-							"wrapper" : module.exports.urlChanger(content, userData),
-							"pageData" : data
-						});
-					});
-			    });
+			socket.on('request reload', function (data) {
+				var pageId = data.pageId;
+				module.exports.loadPage(pageId, function (data) {
+					socket.emit("reloadPage", data);
+				});
 			});
 
 			socket.on('save page', function (data) {
+				var pageId = data.pageId;
 				mongodb.savePage(data, function (doc) {
-					socket.emit("done save page", {pageId : data.pageId});
+					module.exports.loadPage(pageId, function (data) {
+						socket.emit("reloadPage", data);
+					});
 				});
 			});
 
 			socket.on('add sub page', function (data) {
+				var pageId = data.pageId;
 				mongodb.addSubPage(data, function (doc) {
-					socket.emit("done add sub page", {pageId : data.pageId});
+					module.exports.loadPage(pageId, function (data) {
+						socket.emit("reloadPage", data);
+					});
 				});
 			});
 
 			socket.on('remove sub page', function (data) {
+				var pageId = data.pageId;
 				mongodb.removeSubPage(data, function (doc) {
-					socket.emit("done remove sub page", {pageId : data.pageId});
+					module.exports.loadPage(pageId, function (data) {
+						socket.emit("reloadPage", data);
+					});
 				});
 			});
 
 			socket.emit('clean');
 			socket.emit('body', top+wrapper);
-			fs.readFile(webContentDir+"page/header.html", "UTF-8", function (err, content) {
+			module.exports.fs.readFile(webContentDir+"page/header.html", "UTF-8", function (err, content) {
 				socket.emit('head append', module.exports.urlChanger(content));
 				if (socket.handshake.session.userdata) {
 					var userdata = socket.handshake.session.userdata;
@@ -76,6 +83,23 @@ module.exports = {
 			});
 		});
 	},
+    loadPage : function (pageId, callback, url) {
+    	if (typeof url === "undefined") {
+    		url = "./public/content.html"
+    	}
+
+		var userData = {pageId : pageId};
+
+		module.exports.fs.readFile(url, "utf-8", function (err, content) {
+			module.exports.mongodb.getPageData({pageId : pageId}, function (data) {
+				callback({
+					"pageId" : pageId,
+					"wrapper" : module.exports.urlChanger(content, userData),
+					"pageData" : data
+				});
+			});
+	    });
+    },
     urlChanger : function (content, userData) {
     	content = content.replace(/\{\{([a-zA-Z0-1_-]*)\}\}/g, function (text, key) {
     		if (typeof userData !== "undefined" && userData.hasOwnProperty(key)) {

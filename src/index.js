@@ -32,6 +32,22 @@ function hasPage (url) {
 	return false;
 }
 
+function exceptPageId (hash) {
+	switch (hash) {
+	case "one" :
+	case "two" :
+	case "three" :
+	case "four" :
+	case "five" :
+	case "six" :
+	case "seven" :
+	case "eight" :
+	case "nine" :
+		return "main";
+	}
+	return hash;
+}
+
 function setActiveMenu () {
 	hash = window.location.hash.substr(1);
 	if (hasPage(hash)) {
@@ -49,7 +65,7 @@ function initSocket () {
 	});
 
 	socket.on('script append', function(m) {
-		loadjscssfile(homeurl + "/assets/js/" + m, "js")
+		loadjscssfile(homeurl + "/assets/js/" + m, "js");
 	});
 
 	socket.on('head ready', function() {
@@ -71,6 +87,12 @@ function initSocket () {
 		}
 	});
 
+	socket.on('reloadPage', function (m) {
+		var $wrapper = $(m.wrapper);
+		page.load($wrapper, m.pageData, m.pageId);
+		$("#wrapper #container [pageId=\""+m.pageId+"\"]").html("").append($wrapper);
+	});
+	
 	socket.on('done add sub page', function (data) {
 		requestStorage ();
 	});
@@ -101,8 +123,8 @@ function delayAppendWrapper (m) {
 function appendWrapper (m) {
 	var $wrapper = $(m.wrapper);
 	page.load($wrapper, m.pageData, m.pageId);
-	$("#wrapper #container").append($wrapper);
-	$("#navi").append("<li><a href=\"#"+m.pageId+"\" pageId=\""+m.pageId+"\" class=\"button alt fit small\" \">"+(m.pageId==""?"main":m.pageId)+"</a></li>")
+	$("#wrapper #container #main[pageId='edit']").before($wrapper);
+	$("#navi #editNavi").before("<li><a href=\"#"+m.pageId+"\" pageId=\""+m.pageId+"\" class=\"button alt fit small\" \">"+(m.pageId==""?"main":m.pageId)+"</a></li>")
 	naviMoveTo (m.pageId)
 }
 

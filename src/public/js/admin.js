@@ -6,12 +6,13 @@ page.goEdit = function(pageId) {
 	$("#main[pageId='"+pageId+"'] #content").attr("contenteditable", "true");
 	$("#main[pageId='"+pageId+"'] .toolArea").addClass("edit");
 	$("#main[pageId='"+pageId+"'] #subPages").addClass("edit");
-	$("#main[pageId='"+pageId+"'] #five").show();
+	$("#wrapper #naviCase #editNavi").show();
+	$("#wrapper #container [pageId=edit]").show();
 };
 
 page.goView = function(pageId) {
 	if (confirm("변경사항이 저장되지 않습니다.")) {
-		requestStorage();
+		requestReload(pageId);
 	}
 };
 
@@ -43,11 +44,7 @@ page.save = function(pageId) {
 	if (c[0].tagName !== "DIV") {
 		c.replaceWith('<div id="content" contenteditable=true>' + c.val() + '</div>');
 	}
-	savePage({
-		pageId : $("#main[pageId='"+pageId+"'] #pageId").val(),
-		headLine : encodeURI($("[pageId='"+pageId+"'] #headLine").html()),
-		content : encodeURI($("[pageId='"+pageId+"'] #content").html())
-	});
+	savePage(pageId);
 };
 
 page.imageResize = function($image, callback) {
