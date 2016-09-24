@@ -21,8 +21,6 @@ module.exports = {
 				if (path == "mapPage") {
 					pageId = "mapPage";
 					mongodb.getAllTags({}, function (arr) {
-						console.log(arr);
-						
 						var linkData = [];
 						for ( var iter in arr) {
 							
