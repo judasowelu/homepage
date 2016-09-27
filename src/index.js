@@ -125,8 +125,6 @@ function appendWrapper (m) {
 	page.load($wrapper, m.pageData, m.pageId);
 	$("#wrapper #container").append($wrapper);
 	$("#navi").append("<li><a href=\"#"+m.pageId+"\" pageId=\""+m.pageId+"\" class=\"button alt fit small\" \">"+m.pageId+"</a></li>")
-//	$("#wrapper #container #main[pageId='editPage']").before($wrapper);
-//	$("#navi #editNavi").before("<li><a href=\"#"+m.pageId+"\" pageId=\""+m.pageId+"\" class=\"button alt fit small\" \">"+m.pageId+"</a></li>")
 	naviMoveTo (m.pageId)
 }
 

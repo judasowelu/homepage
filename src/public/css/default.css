@@ -41,7 +41,7 @@ ul#navi.actions.fit.small {
 .container {
 	position: relative;
 }
-.container .closePage,
+.closePage,
 #main #hideEditPage {
 	position: absolute;
 	top: 0px;
@@ -50,7 +50,7 @@ ul#navi.actions.fit.small {
 	height:30px; 
 }
 #edit .container .closePage {
-	top: 98px;
+	top: 0px;
 }
 
 #header {
@@ -118,9 +118,6 @@ ul#navi.actions.fit.small {
 @media screen and (max-width: 1680px) {
 	#naviCase {
 		left: 21em;
-	}
-	.container .closePage {
-		top: 40px;
 	}
 }
 
