@@ -28,8 +28,8 @@ io.use(sharedsession(session, {
     autoSave:true
 }));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(function(req, res, next) {
 	var allowedOrigins = [ 'http://judasowelu.dothome.co.kr', 'http://localhost:3080', 'http://192.168.0.4:3080', 'http://192.168.0.2:3080' ];
 	var origin = req.headers.origin;
