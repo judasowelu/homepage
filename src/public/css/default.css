@@ -3,11 +3,14 @@ html,body{
 }
 #container {
 	white-space:nowrap;
-	overflow-x: auto;
+	overflow-x: hidden;
 	overflow-y: hidden;
-	padding-top: 2.18em;
+	padding-top: 2.18em;	
 }
 
+.container #content[contenteditable='true'] {
+    box-shadow: 0px 0px 20px #000;
+}
 
 #naviCase {
 	position : fixed;

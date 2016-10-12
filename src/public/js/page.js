@@ -28,8 +28,13 @@ var page = {
 	closePage : function (pageId) {
 		$("#main[pageId='"+pageId+"']").remove();
 		$("#navi [pageId='"+pageId+"']").parent().remove();
+		
+		var pageid = $("#navi li:visible:first a").attr("pageid");
+		if (typeof pageid == "undefined") {
+			pageid = "mainPage";
+		}
+		location.href = "#"+pageid;
 	}
 
-	
 }
 ;
