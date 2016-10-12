@@ -6,17 +6,16 @@ module.exports = {
 		module.exports.mongodb = mongodb;
 		mongodb.init();
 
-		var webContentDir = "./"+GLOBAL.propertys.cssName+"/";
-		module.exports.webContentDir = webContentDir;
-		var top = module.exports.urlChanger(module.exports.fs.readFileSync(webContentDir+"page/top.html", "utf-8"));
-	    top += module.exports.urlChanger(module.exports.fs.readFileSync("./public/header.html", "utf-8"));
-	    var wrapper = module.exports.urlChanger(module.exports.fs.readFileSync(webContentDir+"page/wrapper.html", "utf-8"));
+		module.exports.webContentDir = "./"+GLOBAL.propertys.cssName+"/";;
+
+		module.exports.initPage();
+
 	    var admin = '<script type="text/javascript" src="//{{url}}/public/js/admin.js"></script>';
 
 		io.on('connection', function (socket) {
 			socket.on('hash', function(path) {
 
-				var url = webContentDir+"index.html";
+				var url = module.exports.webContentDir+"index.html";
 				var pageId = "mainPage";
 				if (path == "mapPage") {
 					pageId = "mapPage";
@@ -87,9 +86,13 @@ module.exports = {
 				});
 			});
 
+			socket.on('initPage', function (data) {
+				module.exports.initPage();
+			});
+			
 			socket.emit('clean');
-			socket.emit('body', top+wrapper);
-			module.exports.fs.readFile(webContentDir+"page/header.html", "UTF-8", function (err, content) {
+			socket.emit('body', module.exports.top+module.exports.wrapper);
+			module.exports.fs.readFile(module.exports.webContentDir+"page/header.html", "UTF-8", function (err, content) {
 				socket.emit('head append', module.exports.urlChanger(content));
 				if (socket.handshake.session.userdata) {
 					var userdata = socket.handshake.session.userdata;
@@ -108,6 +111,12 @@ module.exports = {
 			});
 		});
 	},
+    initPage : function () {
+		module.exports.top = module.exports.urlChanger(module.exports.fs.readFileSync(module.exports.webContentDir+"page/top.html", "utf-8"));
+		module.exports.top += module.exports.urlChanger(module.exports.fs.readFileSync("./public/header.html", "utf-8"));
+	    module.exports.wrapper = module.exports.urlChanger(module.exports.fs.readFileSync(module.exports.webContentDir+"page/wrapper.html", "utf-8"));
+
+    },
     loadPage : function (pageId, callback, url, userData) {
     	if (typeof url === "undefined") {
     		url = "./public/content.html"
